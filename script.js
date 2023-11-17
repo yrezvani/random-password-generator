@@ -89,7 +89,34 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
-function getPasswordOptions() {}
+function getPasswordOptions() {
+    let charType1;
+    do {
+        charType1 = prompt(
+            'Please enter types of characters for the password. Would you like to include uppercase characters?\nPress "Y"/"N"'
+        );
+    } while (charType1.toLowerCase() !== 'y' && charType1.toLowerCase() !== 'n');
+
+    let charType2;
+    do {
+        charType2 = prompt(
+            'Please enter types of characters for the password. Would you like to include UPPERCASE characters?\nPress "Y"/"N"'
+        );
+    } while (charType2.toLowerCase() !== 'y' && charType2.toLowerCase() !== 'n');
+    let charType3;
+    do {
+        charType3 = prompt(
+            'Please enter types of characters for the password. Would you like to include numbers?\nPress "Y"/"N"'
+        );
+    } while (charType3.toLowerCase() !== 'y' && charType3.toLowerCase() !== 'n');
+
+    let charType4;
+    do {
+        charType4 = prompt(
+            'Please enter types of characters for the password. Would you like to include special characters  ($@%&*, etc)?\nPress "Y"/"N"'
+        );
+    } while (charType4.toLowerCase() !== 'y' && charType4.toLowerCase() !== 'n');
+}
 
 // Function for getting a random element from an array
 function getRandom(arr) {}
