@@ -90,39 +90,52 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-    let charType1;
+    let passLength;
     do {
-        charType1 = prompt(
-            'Please enter types of characters for the password. Would you like to include uppercase characters?\nPress "Y"/"N"'
-        );
-    } while (charType1.toLowerCase() !== 'y' && charType1.toLowerCase() !== 'n');
+        passLength = parseInt(prompt('Please enter password length between 8 and 128'));
+    } while (passLength < 8 || passLength > 128);
 
-    let charType2;
-    do {
-        charType2 = prompt(
-            'Please enter types of characters for the password. Would you like to include UPPERCASE characters?\nPress "Y"/"N"'
-        );
-    } while (charType2.toLowerCase() !== 'y' && charType2.toLowerCase() !== 'n');
-    let charType3;
-    do {
-        charType3 = prompt(
-            'Please enter types of characters for the password. Would you like to include numbers?\nPress "Y"/"N"'
-        );
-    } while (charType3.toLowerCase() !== 'y' && charType3.toLowerCase() !== 'n');
+    alert('Please choose what character types you would like to include');
+    let lowerCase;
+    let upperCase;
+    let numbers;
+    let specChars;
 
-    let charType4;
     do {
-        charType4 = prompt(
-            'Please enter types of characters for the password. Would you like to include special characters  ($@%&*, etc)?\nPress "Y"/"N"'
-        );
-    } while (charType4.toLowerCase() !== 'y' && charType4.toLowerCase() !== 'n');
+        alert('Please choose at least one character type.');
+        lowerCase = confirm('Would you like to include lowercase characters?');
+        upperCase = confirm('Would you like to include UPPERCASE characters?');
+        numbers = confirm('Would you like to include numbers?');
+        specChars = confirm('Would you like to include special characters? ($@%&*, etc)');
+    } while (!lowerCase && !upperCase && !numbers && !specChars);
+
+    return {passLength, lowerCase, upperCase, numbers, specChars};
 }
 
+let {passLength, lowerCase, upperCase, numbers, specChars} = getPasswordOptions();
+
 // Function for getting a random element from an array
-function getRandom(arr) {}
+function getRandom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
 
 // Function to generate password with user input
-function generatePassword() {}
+function generatePassword() {
+    let password = [];
+    let characters = lowerCasedCharacters;
+    if (upperCase) characters = characters.concat(upperCasedCharacters);
+    if (numbers) characters = characters.concat(numericCharacters);
+    if (specChars) characters = characters.concat(specialCharacters);
+
+    console.log(upperCase);
+    console.log(numbers);
+    console.log(characters);
+    for (let i = 0; i < passLength; i++) {
+        password.push(getRandom(characters));
+    }
+
+    return password.join('');
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
