@@ -112,8 +112,6 @@ function getPasswordOptions() {
     return {passLength, lowerCase, upperCase, numbers, specChars};
 }
 
-let {passLength, lowerCase, upperCase, numbers, specChars} = getPasswordOptions();
-
 // Function for getting a random element from an array
 function getRandom(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
@@ -121,15 +119,14 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
+    let {passLength, lowerCase, upperCase, numbers, specChars} = getPasswordOptions();
     let password = [];
-    let characters = lowerCasedCharacters;
+    let characters = [];
+    if (lowerCase) characters = characters.concat(lowerCasedCharacters);
     if (upperCase) characters = characters.concat(upperCasedCharacters);
     if (numbers) characters = characters.concat(numericCharacters);
     if (specChars) characters = characters.concat(specialCharacters);
 
-    console.log(upperCase);
-    console.log(numbers);
-    console.log(characters);
     for (let i = 0; i < passLength; i++) {
         password.push(getRandom(characters));
     }
